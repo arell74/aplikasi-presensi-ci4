@@ -1,0 +1,52 @@
+<?php
+
+namespace App\Database\Migrations;
+
+use CodeIgniter\Database\Migration;
+
+class Ketidakhadiran extends Migration
+{
+    public function up()
+    {
+        $this->forge->addField([
+            'id' => [
+                'type'           => 'INT',
+                'constraint'     => 11,
+                'unsigned'       => true,
+                'auto_increment' => true,
+            ],
+            'id_pegawai' => [
+                'type'       => 'INT',
+                'constraint' => '11',
+                'unsigned'       => true,
+            ],
+            'keterangan' => [
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+            ],
+            'tanggal' => [
+                'type' => 'DATE',
+            ],
+            'deskripsi' => [
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+            ],
+            'file' => [
+                'type' => 'VARCHAR',
+                'constraint' => '50',
+            ],
+            'status' => [
+                'type' => 'VARCHAR',
+                'constraint' => '20',
+            ],
+        ]);
+        $this->forge->addKey('id', true);
+        $this->forge->addForeignKey('id_pegawai', 'pegawai', 'id');
+        $this->forge->createTable('ketidakhdiran');
+    }
+
+    public function down()
+    {
+        $this->forge->dropTable('ketidakhadiran');
+    }
+}
