@@ -26,7 +26,7 @@ class Users extends Migration
             ],
             'password' => [
                 'type' => 'VARCHAR',
-                'constraint' => '10',
+                'constraint' => '255',
             ],
             'status' => [
                 'type' => 'VARCHAR',
