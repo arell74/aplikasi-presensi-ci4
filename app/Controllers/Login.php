@@ -41,7 +41,8 @@ class Login extends BaseController
 
                     $session_data = [
                         'logged_in' => TRUE,
-                        'role_id' => $checkUsername['role']
+                        'role_id' => $checkUsername['role'],
+                        'username' => $checkUsername['username']
                     ];
                     $session->set($session_data);
 
@@ -71,4 +72,6 @@ class Login extends BaseController
         $session->destroy();
         return redirect()->to('/');
     }
+
+
 }
