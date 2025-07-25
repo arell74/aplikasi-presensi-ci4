@@ -16,8 +16,10 @@
     <link rel="stylesheet" href="<?= base_url('assets/css/main.css') ?>" />
 
     <!-- Tabler Icon -->
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.34.1/tabler-icons.min.css" integrity="sha512-s0zOeW/zxh8f817uykbgBqmx1dwmdvWwQYamh+lU9NzP8jeQ/ikNPE9dBK+C55A5WUtOetZAI09tLxKIj0r9WQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- dataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css" />
 </head>
 
 <body>
@@ -31,8 +33,13 @@
     <aside class="sidebar-nav-wrapper">
         <div class="navbar-logo">
             <a href="index.html">
-                <h3 class="text-bold"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-code"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 8l-4 4l4 4" /><path d="M17 8l4 4l-4 4" /><path d="M14 4l-4 16" /></svg>
-                 Presen<span style="color: purple;">-ssi</span></h3>
+                <h3 class="text-bold"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-code">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M7 8l-4 4l4 4" />
+                        <path d="M17 8l4 4l-4 4" />
+                        <path d="M14 4l-4 16" />
+                    </svg>
+                    Presen<span style="color: purple;">-ssi</span></h3>
             </a>
         </div>
         <nav class="sidebar-nav">
@@ -68,8 +75,33 @@
                         href="#0"
                         class="collapsed"
                         data-bs-toggle="collapse"
-                        data-bs-target="#ddmenu_5"
-                        aria-controls="ddmenu_5"
+                        data-bs-target="#master_data"
+                        aria-controls="master_data"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-databricks">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M3 17l9 5l9 -5v-3l-9 5l-9 -5v-3l9 5l9 -5v-3l-9 5l-9 -5l9 -5l5.418 3.01" />
+                        </svg>
+                        <span class="text"> Master Data </span>
+                    </a>
+                    <ul id="master_data" class="collapse dropdown-nav">
+                        <li>
+                            <a href="<?= base_url('admin/jabatan') ?>"> Data Jabatan </a>
+                        </li>
+                        <li>
+                            <a href="form-elements.html"> Lokasi Presensi </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item nav-item-has-children mb-2">
+                    <a
+                        href="#0"
+                        class="collapsed"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#rekap_presensi"
+                        aria-controls="rekap_presensi"
                         aria-expanded="false"
                         aria-label="Toggle navigation">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-checkup-list">
@@ -82,7 +114,7 @@
                         </svg>
                         <span class="text"> Rekap Presensi </span>
                     </a>
-                    <ul id="ddmenu_5" class="collapse dropdown-nav">
+                    <ul id="rekap_presensi" class="collapse dropdown-nav">
                         <li>
                             <a href="form-elements.html"> Rekap Harian </a>
                         </li>
@@ -111,7 +143,12 @@
 
                 <li class="nav-item">
                     <a href="notification.html">
-                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-logout"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" /><path d="M9 12h12l-3 -3" /><path d="M18 15l3 -3" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-logout">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                            <path d="M9 12h12l-3 -3" />
+                            <path d="M18 15l3 -3" />
+                        </svg>
                         <span class="text">Logout</span>
                     </a>
                 </li>
@@ -287,7 +324,7 @@
                     <!-- end row -->
                 </div>
                 <!-- ========== title-wrapper end ========== -->
-                 <?= $this->renderSection('content') ?>
+                <?= $this->renderSection('content') ?>
             </div>
             <!-- end container -->
         </section>
@@ -300,6 +337,42 @@
     <script src="<?= base_url('assets/js/jvectormap.min.js') ?> "></script>
     <script src="<?= base_url('assets/js/polyfill.js') ?> "></script>
     <script src="<?= base_url('assets/js/main.js') ?> "></script>
+
+    <!-- jquery cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- dataTable -->
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
+
+    <!-- sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#datatables').DataTable();
+        });
+
+        // berhasil
+        $(function() {
+            <?php if (session()->has('berhasil')) { ?>
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "<?= $_SESSION['berhasil']; ?>"
+                });
+            <?php } ?>
+        })
+    </script>
 </body>
 
 </html>
