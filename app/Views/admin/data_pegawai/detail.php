@@ -4,6 +4,7 @@
 
 <div class="card col-md-8">
     <div class="card-body">
+        <img width="200px" style="border-radius: 5px;" src="<?= base_url('profile/' . $data_pegawai['foto_pegawai']); ?>" alt="">
         <table class="table">
             <tr>
                 <td>NIP</td>
