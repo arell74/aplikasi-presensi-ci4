@@ -11,6 +11,12 @@ use App\Models\JabatanModel;
 
 class DataPegawai extends BaseController
 {
+
+    function __construct()
+    {
+        helper(['url', 'form']);
+    }
+
     public function index()
     {
         $pegawaiModel = new PegawaiModel();
@@ -96,8 +102,9 @@ class DataPegawai extends BaseController
                 ],
             ],
             'foto_pegawai' => [
-                'rules' => 'max_size[foto_pegawai, 10240]|mime_in[foto_pegawai,image/png,image/jpeg]',
+                'rules' => 'uploaded[foto_pegawai]|max_size[foto_pegawai, 10240]|mime_in[foto_pegawai,image/png,image/jpeg]',
                 'errors' => [
+                    'uploaded' => 'Foto Harus Di Upload!',
                     'max_size' => "Ukuran foto melebihi 10 MB!",
                     'mime_in' => "Jenis File yang diizinkan hanya PNG atau JPEG!"
                 ],
@@ -180,114 +187,141 @@ class DataPegawai extends BaseController
 
     public function edit($id)
     {
+        $jabatan = new JabatanModel();
         $pegawaiModel = new PegawaiModel();
+        $lokasi_presensi = new LokasiPresensiModel();
         $data = [
-            'title' => 'Edit Data Lokasi Presensi',
-            'lokasi_presensi' => $pegawaiModel->find($id),
-            'validation' => service('validation')
+            'title' => 'Edit Data Pegawai',
+            'pegawai' => $pegawaiModel->editPegawai($id),
+            'validation' => service('validation'),
+            'lokasi_presensi' => $lokasi_presensi->findAll(),
+            'jabatan' => $jabatan->orderBy('jabatan', 'ASC')->findAll(),
         ];
 
-        return view('admin/lokasi_presensi/edit', $data);
+        return view('admin/data_pegawai/edit', $data);
     }
 
     public function update($id)
     {
         $rules = [
-            'nama_lokasi' => [
+            'nama' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => "Nama Lokasi Wajib Diisi!"
+                    'required' => "Nama Wajib Diisi!"
                 ],
             ],
-            'alamat_lokasi' => [
+            'jenis_kelamin' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => "Alamat Lokasi Wajib Diisi!"
+                    'required' => "Jenis Kelamin Wajib Diisi!"
                 ],
             ],
-            'tipe_lokasi' => [
+            'no_hp' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => "Tipe Lokasi Wajib Diisi!"
+                    'required' => "Nomor HP Wajib Diisi!"
                 ],
             ],
-            'latitude' => [
+            'alamat' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => "Latitude Wajib Diisi!"
+                    'required' => "Alamat Wajib Diisi!"
                 ],
             ],
-            'longitude' => [
+            'jabatan' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => "Longitude Wajib Diisi!"
+                    'required' => "Jabatan Wajib Diisi!"
                 ],
             ],
-            'radius' => [
+            'lokasi_presensi' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => "Radius Wajib Diisi!"
+                    'required' => "Lokasi Presensi Wajib Diisi!"
                 ],
             ],
-            'zona_waktu' => [
+            'username' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => "Zona Waktu Wajib Diisi!"
+                    'required' => "Username Wajib Diisi!"
                 ],
             ],
-            'jam_masuk' => [
+            'role' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => "Jam Masuk Wajib Diisi!"
-                ],
-            ],
-            'jam_pulang' => [
-                'rules' => 'required',
-                'errors' => [
-                    'required' => "Jam Pulang Wajib Diisi!"
+                    'required' => "Role Wajib Diisi!"
                 ],
             ],
         ];
 
         if (!$this->validate($rules)) {
+            $jabatan = new JabatanModel();
             $pegawaiModel = new PegawaiModel();
+            $lokasi_presensi = new LokasiPresensiModel();
             $data = [
-                'title' => 'Edit Data Lokasi Presensi',
-                'lokasi_presensi' => $pegawaiModel->find($id),
-                'validation' => service('validation')
+                'title' => 'Edit Data Pegawai',
+                'pegawai' => $pegawaiModel->editPegawai($id),
+                'validation' => service('validation'),
+                'lokasi_presensi' => $lokasi_presensi->findAll(),
+                'jabatan' => $jabatan->orderBy('jabatan', 'ASC')->findAll(),
             ];
-            echo view('admin/lokasi_presensi/edit', $data);
+
+            return view('admin/data_pegawai/edit', $data);
         } else {
-            $pegawaiModel = new pegawaiModel();
+            $pegawaiModel = new PegawaiModel();
+            $userModel = new UserModel();
+            $foto = $this->request->getFile('foto_pegawai');
+
+            if ($foto->getError() == 4) {
+                $nama_foto = $this->request->getPost('foto_lama');
+            } else {
+                $nama_foto = $foto->getRandomName();
+                $foto->move('profile', $nama_foto);
+            }
             $pegawaiModel->update($id, [
-                'nama_lokasi' => $this->request->getPost('nama_lokasi'),
-                'alamat_lokasi' => $this->request->getPost('alamat_lokasi'),
-                'tipe_lokasi' => $this->request->getPost('tipe_lokasi'),
-                'latitude' => $this->request->getPost('latitude'),
-                'longitude' => $this->request->getPost('longitude'),
-                'radius' => $this->request->getPost('radius'),
-                'zona_waktu' => $this->request->getPost('zona_waktu'),
-                'jam_masuk' => $this->request->getPost('jam_masuk'),
-                'jam_pulang' => $this->request->getPost('jam_pulang'),
+                'nama' => $this->request->getPost('nama'),
+                'jenis_kelamin' => $this->request->getPost('jenis_kelamin'),
+                'alamat' => $this->request->getPost('alamat'),
+                'no_hp' => $this->request->getPost('no_hp'),
+                'jabatan' => $this->request->getPost('jabatan'),
+                'lokasi_presensi' => $this->request->getPost('lokasi_presensi'),
+                'foto_pegawai' => $nama_foto,
             ]);
 
-            session()->setFlashdata('berhasil', 'Data Lokasi Presensi Berhasil Diupdate!');
+            if ($this->request->getPost('password') == '') {
+                $password = $this->request->getPost('password_lama');
+            } else {
+                $password = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
+            }
+            $userModel
+                ->where('id_pegawai', $id)
+                ->set([
+                    'username' => $this->request->getPost('username'),
+                    'password' => $password,
+                    'status' => $this->request->getPost('status'),
+                    'role' => $this->request->getPost('role')
+                    ])
+                ->update();
 
-            return redirect()->to(base_url('admin/lokasi_presensi'));
+            session()->setFlashdata('berhasil', 'Data Pegawai Berhasil Diupdate!');
+
+            return redirect()->to(base_url('admin/data_pegawai'));
         }
     }
 
     public function delete($id)
     {
         $pegawaiModel = new PegawaiModel();
+        $userModel = new UserModel();
 
-        $lokasi_presensi = $pegawaiModel->find($id);
-        if ($lokasi_presensi) {
+        $pegawai = $pegawaiModel->find($id);
+        if ($pegawai) {
+            $userModel->where('id_pegawai', $id)->delete();
             $pegawaiModel->delete($id);
 
-            session()->setFlashdata('berhasil', 'Data Lokasi Presensi Berhasil Dihapus!');
+            session()->setFlashdata('berhasil', 'Data Pegawai Berhasil Dihapus!');
 
-            return redirect()->to(base_url('admin/lokasi_presensi'));
+            return redirect()->to(base_url('admin/data_pegawai'));
         }
     }
 }

@@ -7,7 +7,7 @@
         <form method="POST" action="<?= base_url('admin/data_pegawai/store'); ?>" enctype="multipart/form-data">
             <div class="input-style-1">
                 <label>Nama Pegawai</label>
-                <input type="text" class="<?= ($validation->hasError('nama')) ? 'is-invalid' : '' ?> form-control" placeholder="Nama Pegawai" name="nama" />
+                <input type="text" value="<?= set_value('nama') ?>" class="<?= ($validation->hasError('nama')) ? 'is-invalid' : '' ?> form-control" placeholder="Nama Pegawai" name="nama" />
                 <div class="invalid-feedback">
                     <?= $validation->getError('nama'); ?>
                 </div>
@@ -25,14 +25,14 @@
             </div>
             <div class="input-style-1">
                 <label>Alamat Pegawai</label>
-                <textarea name="alamat" id="" class="<?= ($validation->hasError('alamat')) ? 'is-invalid' : ''; ?> form-control" placeholder="Alamat"></textarea>
+                <textarea name="alamat" id="" class="<?= ($validation->hasError('alamat')) ? 'is-invalid' : ''; ?> form-control" placeholder="Alamat"><?= set_value('alamat') ?></textarea>
                 <div class="invalid-feedback">
                     <?= $validation->getError('alamat'); ?>
                 </div>
             </div>
             <div class="input-style-1">
                 <label>Nomor Handphone</label>
-                <input type="number" class="<?= ($validation->hasError('no_hp')) ? 'is-invalid' : '' ?> form-control" placeholder="Nomor Handphone" name="no_hp" />
+                <input type="number" value="<?= set_value('no_hp') ?>" class="<?= ($validation->hasError('no_hp')) ? 'is-invalid' : '' ?> form-control" placeholder="Nomor Handphone" name="no_hp" />
                 <div class="invalid-feedback">
                     <?= $validation->getError('no_hp'); ?>
                 </div>
@@ -70,7 +70,7 @@
             </div>
             <div class="input-style-1">
                 <label>Username</label>
-                <input type="text" class="<?= ($validation->hasError('username')) ? 'is-invalid' : '' ?> form-control" placeholder="Username" name="username" />
+                <input type="text" value="<?= set_value('username'); ?>" class="<?= ($validation->hasError('username')) ? 'is-invalid' : '' ?> form-control" placeholder="Username" name="username" />
                 <div class="invalid-feedback">
                     <?= $validation->getError('username'); ?>
                 </div>
