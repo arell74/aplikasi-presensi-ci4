@@ -8,7 +8,6 @@ use App\Models\PegawaiModel;
 use App\Models\UserModel;
 use App\Models\LokasiPresensiModel;
 use App\Models\JabatanModel;
-use App\Models\RoleModel;
 
 class DataPegawai extends BaseController
 {
@@ -28,7 +27,7 @@ class DataPegawai extends BaseController
         $pegawaiModel = new PegawaiModel();
         $data = [
             'title' => 'Detail Pegawai',
-            'data_pegawai' => $pegawaiModel->detailPegawai($id)
+            'data_pegawai' => $pegawaiModel->detailPegawai($id),
         ];
         return view('admin/data_pegawai/detail', $data);
     }
@@ -37,13 +36,11 @@ class DataPegawai extends BaseController
     {
         $jabatan = new JabatanModel();
         $lokasi_presensi = new LokasiPresensiModel();
-        $role = new RoleModel();
         $data = [
             'title' => 'Tambah Data Pegawai',
             'validation' => service('validation'),
             'lokasi_presensi' => $lokasi_presensi->findAll(),
-            'jabatan' => $jabatan->orderBy('jabatan', 'ASC')->findAll(),
-            'role' => $role->findAll()
+            'jabatan' => $jabatan->orderBy('jabatan', 'ASC')->findAll()
         ];
 
         return view('admin/data_pegawai/create', $data);
@@ -133,13 +130,11 @@ class DataPegawai extends BaseController
         ];
         $jabatan = new JabatanModel();
         $lokasi_presensi = new LokasiPresensiModel();
-        $role = new RoleModel();
         $data = [
             'title' => 'Tambah Data Pegawai',
             'validation' => service('validation'),
             'lokasi_presensi' => $lokasi_presensi->findAll(),
             'jabatan' => $jabatan->orderBy('jabatan', 'ASC')->findAll(),
-            'role' => $role->findAll()
         ];
         if (!$this->validate($rules)) {
             echo view('admin/data_pegawai/create', $data);
@@ -164,7 +159,7 @@ class DataPegawai extends BaseController
                 'no_hp' => $this->request->getPost('no_hp'),
                 'jabatan' => $this->request->getPost('jabatan'),
                 'lokasi_presensi' => $this->request->getPost('lokasi_presensi'),
-                'foto' => $nama_foto,
+                'foto_pegawai' => $nama_foto,
             ]);
 
             $id_pegawai = $pegawaiModel->insertID();

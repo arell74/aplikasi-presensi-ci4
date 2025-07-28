@@ -13,7 +13,7 @@ class PegawaiModel extends Model
         'nama',
         'jenis_kelamin',
         'alamat',
-        'no_handphone',
+        'no_hp',
         'jabatan',
         'lokasi_presensi',
         'foto_pegawai',

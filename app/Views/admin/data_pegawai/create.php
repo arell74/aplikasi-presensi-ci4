@@ -14,13 +14,13 @@
             </div>
             <div class="input-style-1">
                 <label>Jenis Kelamin</label>
-                <select name="role" class="form-control <?= ($validation->hasError('role')) ? 'is-invalid' : '' ?>">
+                <select name="jenis_kelamin" class="form-control <?= ($validation->hasError('jenis_kelamin')) ? 'is-invalid' : '' ?>">
                     <option value="">--Pilih Jenis Kelamin</option>
                     <option value="laki-laki">Laki-laki</option>
                     <option value="perempuan">Perempuan</option>
                 </select>
                 <div class="invalid-feedback">
-                    <?= $validation->getError('role'); ?>
+                    <?= $validation->getError('jenis_kelamin'); ?>
                 </div>
             </div>
             <div class="input-style-1">
@@ -63,7 +63,7 @@
             </div>
             <div class="input-style-1">
                 <label>Foto</label>
-                <input type="file" class="<?= ($validation->hasError('foto_pegawai')) ? 'is-invalid' : '' ?> form-control" placeholder="Latitude" name="foto_pegawai" />
+                <input type="file" class="<?= ($validation->hasError('foto_pegawai')) ? 'is-invalid' : '' ?> form-control" name="foto_pegawai" />
                 <div class="invalid-feedback">
                     <?= $validation->getError('foto_pegawai'); ?>
                 </div>
@@ -91,13 +91,10 @@
             </div>
             <div class="input-style-1">
                 <label>Role</label>
-                <select name="jenis_kelamin" class="form-control <?= ($validation->hasError('role')) ? 'is-invalid' : '' ?>">
+                <select name="role" class="form-control <?= ($validation->hasError('role')) ? 'is-invalid' : '' ?>">
                     <option value="">--Pilih Role</option>
-                    <?php foreach ($role as $r) : ?>
-                        <option value="<?= $r['id']; ?>" <?= old('role') == $r['id'] ? 'selected' : '' ?>>
-                            <?= $r['role']; ?>
-                        </option>
-                    <?php endforeach; ?>
+                    <option value="Admin">Admin</option>
+                    <option value="Pegawai">Pegawai</option>
                 </select>
                 <div class="invalid-feedback">
                     <?= $validation->getError('role'); ?>
