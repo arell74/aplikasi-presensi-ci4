@@ -7,42 +7,42 @@
         <form method="POST" action="<?= base_url('admin/lokasi_presensi/store'); ?>">
             <div class="input-style-1">
                 <label>Nama Lokasi</label>
-                <input type="text" class="<?= ($validation->hasError('nama_lokasi')) ? 'is-invalid' : '' ?> form-control" placeholder="Nama Lokasi" name="nama_lokasi" />
+                <input type="text" value="<?= set_value('nama_lokasi'); ?>" class="<?= ($validation->hasError('nama_lokasi')) ? 'is-invalid' : '' ?> form-control" placeholder="Nama Lokasi" name="nama_lokasi" />
                 <div class="invalid-feedback">
                     <?= $validation->getError('nama_lokasi'); ?>
                 </div>
             </div>
             <div class="input-style-1">
                 <label>Alamat Lokasi</label>
-                <textarea name="alamat_lokasi" id="" class="<?= ($validation->hasError('alamat_lokasi')) ? 'is-invalid' : ''; ?> form-control" placeholder="Alamat Lokasi"></textarea>
+                <textarea name="alamat_lokasi" id="" class="<?= ($validation->hasError('alamat_lokasi')) ? 'is-invalid' : ''; ?> form-control" placeholder="Alamat Lokasi"><?= set_value('alamat_lokasi'); ?></textarea>
                 <div class="invalid-feedback">
                     <?= $validation->getError('alamat_lokasi'); ?>
                 </div>
             </div>
             <div class="input-style-1">
                 <label>Tipe Lokasi</label>
-                <input type="text" class="<?= ($validation->hasError('tipe_lokasi')) ? 'is-invalid' : '' ?> form-control" placeholder="Tipe Lokasi" name="tipe_lokasi" />
+                <input type="text" value="<?= set_value('tipe_lokasi'); ?>" class="<?= ($validation->hasError('tipe_lokasi')) ? 'is-invalid' : '' ?> form-control" placeholder="Tipe Lokasi" name="tipe_lokasi" />
                 <div class="invalid-feedback">
                     <?= $validation->getError('tipe_lokasi'); ?>
                 </div>
             </div>
             <div class="input-style-1">
                 <label>latitude</label>
-                <input type="text" class="<?= ($validation->hasError('latitude')) ? 'is-invalid' : '' ?> form-control" placeholder="Latitude" name="latitude" />
+                <input type="text" value="<?= set_value('latitude'); ?>" class="<?= ($validation->hasError('latitude')) ? 'is-invalid' : '' ?> form-control" placeholder="Latitude" name="latitude" />
                 <div class="invalid-feedback">
                     <?= $validation->getError('latitude'); ?>
                 </div>
             </div>
             <div class="input-style-1">
                 <label>Longitude</label>
-                <input type="text" class="<?= ($validation->hasError('longitude')) ? 'is-invalid' : '' ?> form-control" placeholder="Longitude" name="longitude" />
+                <input type="text" value="<?= set_value('longitude'); ?>" class="<?= ($validation->hasError('longitude')) ? 'is-invalid' : '' ?> form-control" placeholder="Longitude" name="longitude" />
                 <div class="invalid-feedback">
                     <?= $validation->getError('longitude'); ?>
                 </div>
             </div>
             <div class="input-style-1">
                 <label>Radius</label>
-                <input type="number" class="<?= ($validation->hasError('radius')) ? 'is-invalid' : '' ?> form-control" placeholder="Radius" name="radius" />
+                <input type="number" value="<?= set_value('radius'); ?>" class="<?= ($validation->hasError('radius')) ? 'is-invalid' : '' ?> form-control" placeholder="Radius" name="radius" />
                 <div class="invalid-feedback">
                     <?= $validation->getError('radius'); ?>
                 </div>
@@ -51,9 +51,9 @@
                 <label>Zona Waktu</label>
                 <select name="zona_waktu" class="form-control <?= ($validation->hasError('zona_waktu')) ? 'is-invalid' : '' ?>">
                     <option value="">--Pilih Zona Waktu</option>
-                    <option value="WIB">WIB</option>
-                    <option value="WITA">WITA</option>
-                    <option value="WIT">WIT</option>
+                    <option value="WIB" <?= set_select('zona_waktu', 'WIB'); ?>>WIB</option>
+                    <option value="WITA" <?= set_select('zona_waktu', 'WITA'); ?>>WITA</option>
+                    <option value="WIT" <?= set_select('zona_waktu', 'WIT'); ?>>WIT</option>
                 </select>
                 <div class="invalid-feedback">
                     <?= $validation->getError('zona_waktu'); ?>
@@ -61,14 +61,14 @@
             </div>
             <div class="input-style-1">
                 <label>Jam Masuk</label>
-                <input type="time" class="<?= ($validation->hasError('jam_masuk')) ? 'is-invalid' : '' ?> form-control" placeholder="Jam Masuk" name="jam_masuk" />
+                <input type="time" value="<?= set_value('jam_masuk'); ?>" class="<?= ($validation->hasError('jam_masuk')) ? 'is-invalid' : '' ?> form-control" placeholder="Jam Masuk" name="jam_masuk" />
                 <div class="invalid-feedback">
                     <?= $validation->getError('jam_masuk'); ?>
                 </div>
             </div>
             <div class="input-style-1">
                 <label>Jam Pulang</label>
-                <input type="time" class="<?= ($validation->hasError('jam_pulang')) ? 'is-invalid' : '' ?> form-control" placeholder="Jam Pulang" name="jam_pulang" />
+                <input type="time" value="<?= set_value('jam_pulang'); ?>" class="<?= ($validation->hasError('jam_pulang')) ? 'is-invalid' : '' ?> form-control" placeholder="Jam Pulang" name="jam_pulang" />
                 <div class="invalid-feedback">
                     <?= $validation->getError('jam_pulang'); ?>
                 </div>

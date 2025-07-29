@@ -7,7 +7,7 @@
         <form method="POST" action="<?= base_url('admin/jabatan/store'); ?>">
             <div class="input-style-1">
                 <label>Nama Jabatan</label>
-                <input type="text" class="<?= ($validation->hasError('jabatan')) ? 'is-invalid' : '' ?> form-control" placeholder="Nama Jabatan" name="jabatan" />
+                <input type="text" value="<?= set_value('jabatan'); ?>" class="<?= ($validation->hasError('jabatan')) ? 'is-invalid' : '' ?> form-control" placeholder="Nama Jabatan" name="jabatan" />
                 <div class="invalid-feedback">
                     <?= $validation->getError('jabatan'); ?>
                 </div>

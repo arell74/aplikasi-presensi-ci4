@@ -8,6 +8,11 @@ use App\Models\JabatanModel;
 
 class Jabatan extends BaseController
 {
+
+    function __construct()
+    {
+        helper(['url', 'form']);
+    }
     public function index()
     {
         $jabatanModel = new JabatanModel();

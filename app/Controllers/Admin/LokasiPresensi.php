@@ -8,6 +8,11 @@ use App\Models\LokasiPresensiModel;
 
 class LokasiPresensi extends BaseController
 {
+
+    function __construct()
+    {
+        helper(['url', 'form']);
+    }
     public function index()
     {
         $lokasiPresensiModel = new LokasiPresensiModel();

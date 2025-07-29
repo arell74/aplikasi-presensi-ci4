@@ -16,8 +16,8 @@
                 <label>Jenis Kelamin</label>
                 <select name="jenis_kelamin" class="form-control <?= ($validation->hasError('jenis_kelamin')) ? 'is-invalid' : '' ?>">
                     <option value="">--Pilih Jenis Kelamin</option>
-                    <option value="laki-laki">Laki-laki</option>
-                    <option value="perempuan">Perempuan</option>
+                    <option value="laki-laki" <?= set_select('jenis_kelamin', 'laki-laki'); ?>>Laki-laki</option>
+                    <option value="perempuan" <?= set_select('jenis_kelamin', 'perempuan'); ?>>Perempuan</option>
                 </select>
                 <div class="invalid-feedback">
                     <?= $validation->getError('jenis_kelamin'); ?>
@@ -42,7 +42,7 @@
                 <select name="jabatan" class="form-control <?= ($validation->hasError('jabatan')) ? 'is-invalid' : '' ?>">
                     <option value="">--Pilih Jabatan</option>
                     <?php foreach ($jabatan as $jab) :  ?>
-                        <option value="<?= $jab['jabatan']; ?>"><?= $jab['jabatan']; ?></option>
+                        <option value="<?= $jab['jabatan']; ?>" <?= set_select('jabatan', $jab['jabatan']); ?>><?= $jab['jabatan']; ?></option>
                     <?php endforeach; ?>
                 </select>
                 <div class="invalid-feedback">
@@ -54,7 +54,7 @@
                 <select name="lokasi_presensi" class="form-control <?= ($validation->hasError('lokasi_presensi')) ? 'is-invalid' : '' ?>">
                     <option value="">--Pilih Lokasi Presensi</option>
                     <?php foreach ($lokasi_presensi as $lok) :  ?>
-                        <option value="<?= $lok['id']; ?>"><?= $lok['nama_lokasi']; ?></option>
+                        <option value="<?= $lok['id']; ?>" <?= set_select('lokasi_presensi', $lok['id']); ?>><?= $lok['nama_lokasi']; ?></option>
                     <?php endforeach; ?>
                 </select>
                 <div class="invalid-feedback">
@@ -77,14 +77,14 @@
             </div>
             <div class="input-style-1">
                 <label>Password</label>
-                <input type="password" class="<?= ($validation->hasError('password')) ? 'is-invalid' : '' ?> form-control" placeholder="Password" name="password" />
+                <input type="password" value="<?= set_value('password'); ?>" class="<?= ($validation->hasError('password')) ? 'is-invalid' : '' ?> form-control" placeholder="Password" name="password" />
                 <div class="invalid-feedback">
                     <?= $validation->getError('password'); ?>
                 </div>
             </div>
             <div class="input-style-1">
                 <label>Konfirmasi Password</label>
-                <input type="password" class="<?= ($validation->hasError('konfirmasi_password')) ? 'is-invalid' : '' ?> form-control" placeholder="Konfirmasi Password" name="konfirmasi_password" />
+                <input type="password" value="<?= set_value('konfirmasi_password'); ?>" class="<?= ($validation->hasError('konfirmasi_password')) ? 'is-invalid' : '' ?> form-control" placeholder="Konfirmasi Password" name="konfirmasi_password" />
                 <div class="invalid-feedback">
                     <?= $validation->getError('konfirmasi_password'); ?>
                 </div>
@@ -93,8 +93,8 @@
                 <label>Role</label>
                 <select name="role" class="form-control <?= ($validation->hasError('role')) ? 'is-invalid' : '' ?>">
                     <option value="">--Pilih Role</option>
-                    <option value="Admin">Admin</option>
-                    <option value="Pegawai">Pegawai</option>
+                    <option value="Admin" <?= set_select('role', 'Admin'); ?>>Admin</option>
+                    <option value="Pegawai" <?= set_select('role', 'Pegawai'); ?>>Pegawai</option>
                 </select>
                 <div class="invalid-feedback">
                     <?= $validation->getError('role'); ?>
