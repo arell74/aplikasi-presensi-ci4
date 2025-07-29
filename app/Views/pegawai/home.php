@@ -26,7 +26,10 @@
             <div>:</div>
             <div id="detik-masuk"></div>
           </div>
-          <form action="">
+          <form method="POST" action="<?= base_url('pegawai/presensi_masuk'); ?>">
+            <input type="text" name="tanggal_masuk" value="<?= date('d M Y'); ?>">
+            <input type="text" name="jam_masuk" value="<?= date('H:i:s'); ?>">
+            <input type="text" name="id_pegawai" value="<?= session()->get('id_pegawai'); ?>">
             <button class="btn btn-primary mt-3">Masuk</button>
           </form>
         </div>

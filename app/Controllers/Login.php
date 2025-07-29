@@ -42,7 +42,8 @@ class Login extends BaseController
                     $session_data = [
                         'logged_in' => TRUE,
                         'role_id' => $checkUsername['role'],
-                        'username' => $checkUsername['username']
+                        'username' => $checkUsername['username'],
+                        'id_pegawai' => $checkUsername['id']
                     ];
                     $session->set($session_data);
 
