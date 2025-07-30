@@ -15,8 +15,9 @@
 <div class="row">
   <div class="col-md-2"></div>
   <div class="col-md-4">
-      <div class="card">
-        <div class="card-header">Presensi Masuk</div>
+    <div class="card h-100">
+      <div class="card-header">Presensi Masuk</div>
+      <?php if ($cek_presensi < 1) : ?>
         <div class="card-body text-center">
           <div class="tanggal"><?= date('d F Y') ?></div>
           <div class="parent-clock">
@@ -27,33 +28,56 @@
             <div id="detik-masuk"></div>
           </div>
           <form method="POST" action="<?= base_url('pegawai/presensi_masuk'); ?>">
-            <input type="text" name="tanggal_masuk" value="<?= date('d M Y'); ?>">
-            <input type="text" name="jam_masuk" value="<?= date('H:i:s'); ?>">
-            <input type="text" name="id_pegawai" value="<?= session()->get('id_pegawai'); ?>">
+            <?php
+            if ($lokasi_presensi['zona_waktu'] == 'WIB') {
+              date_default_timezone_set('Asia/Jakarta');
+            } else if ($lokasi_presensi['zona_waktu'] == 'WITA') {
+              date_default_timezone_set('Asia/Makassar');
+            } else if ($lokasi_presensi['zona_waktu'] == 'WIT') {
+              date_default_timezone_set('Asia/Jayapura');
+            }
+            ?>
+
+            <input type="hidden" name="latitude_kantor" value="<?= $lokasi_presensi['latitude']; ?>">
+            <input type="hidden" name="longitude_kantor" value="<?= $lokasi_presensi['longitude']; ?>">
+            <input type="hidden" name="radius" value="<?= $lokasi_presensi['radius']; ?>">
+
+            <input type="hidden" name="latitude_pegawai" id="latitude_pegawai">
+            <input type="hidden" name="longitude_pegawai" id="longitude_pegawai">
+
+            <input type="hidden" name="tanggal_masuk" value="<?= date('Y-m-d'); ?>">
+            <input type="hidden" name="jam_masuk" value="<?= date('H:i:s'); ?>">
+            <input type="hidden" name="id_pegawai" value="<?= session()->get('id_pegawai'); ?>">
             <button class="btn btn-primary mt-3">Masuk</button>
           </form>
         </div>
-      </div>
+      <?php else : ?>
+        <div class="card-body text-center">
+          	<i class="lni lni-checkmark-circle" style="font-size: 32px;"></i>
+          <h5 class="text-center mt-2">Anda Telah Melakukan Presensi Masuk</h5>
+        </div>
+      <?php endif; ?>
     </div>
+  </div>
 
   <div class="col-md-4">
-      <div class="card">
-        <div class="card-header">Presensi Keluar</div>
-        <div class="card-body text-center">
-          <div class="tanggal"><?= date('d F Y') ?></div>
-          <div class="parent-clock">
-            <div id="jam-keluar"></div>
-            <div>:</div>
-            <div id="menit-keluar"></div>
-            <div>:</div>
-            <div id="detik-keluar"></div>
-          </div>
-          <form action="">
-            <button class="btn btn-danger mt-3">Keluar</button>
-          </form>
+    <div class="card">
+      <div class="card-header">Presensi Keluar</div>
+      <div class="card-body text-center">
+        <div class="tanggal"><?= date('d F Y') ?></div>
+        <div class="parent-clock">
+          <div id="jam-keluar"></div>
+          <div>:</div>
+          <div id="menit-keluar"></div>
+          <div>:</div>
+          <div id="detik-keluar"></div>
         </div>
+        <form action="">
+          <button class="btn btn-danger mt-3">Keluar</button>
+        </form>
       </div>
     </div>
+  </div>
   <div class="col-md-2"></div>
 </div>
 
@@ -61,7 +85,7 @@
   window.setInterval("waktuMasuk()", 1000);
 
   function waktuMasuk() {
-    const waktu  = new Date();
+    const waktu = new Date();
     document.getElementById("jam-masuk").innerHTML = formatWaktu(waktu.getHours());
     document.getElementById("menit-masuk").innerHTML = formatWaktu(waktu.getMinutes());
     document.getElementById("detik-masuk").innerHTML = formatWaktu(waktu.getSeconds());
@@ -70,20 +94,34 @@
   window.setInterval("waktuKeluar()", 1000);
 
   function waktuKeluar() {
-    const waktu  = new Date();
+    const waktu = new Date();
     document.getElementById("jam-keluar").innerHTML = formatWaktu(waktu.getHours());
     document.getElementById("menit-keluar").innerHTML = formatWaktu(waktu.getMinutes());
     document.getElementById("detik-keluar").innerHTML = formatWaktu(waktu.getSeconds());
   }
 
   function formatWaktu(waktu) {
-    if(waktu < 10) {
+    if (waktu < 10) {
       return "0" + waktu;
     } else {
       return waktu;
     }
   }
-  
+
+  getLocation();
+
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      alert("Browser Anda Tidak Mendukung Geolokasi");
+    }
+  }
+
+  function showPosition(position) {
+    document.getElementById('latitude_pegawai').value = position.coords.latitude;
+    document.getElementById('longitude_pegawai').value = position.coords.longitude;
+  }
 </script>
 
 

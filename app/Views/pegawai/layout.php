@@ -31,14 +31,19 @@
     <aside class="sidebar-nav-wrapper">
         <div class="navbar-logo">
             <a href="index.html">
-                <h3 class="text-bold"><svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-code"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 8l-4 4l4 4" /><path d="M17 8l4 4l-4 4" /><path d="M14 4l-4 16" /></svg>
-                 Presen<span style="color: purple;">-ssi</span></h3>
+                <h3 class="text-bold"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-code">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M7 8l-4 4l4 4" />
+                        <path d="M17 8l4 4l-4 4" />
+                        <path d="M14 4l-4 16" />
+                    </svg>
+                    Presen<span style="color: purple;">-ssi</span></h3>
             </a>
         </div>
         <nav class="sidebar-nav">
             <ul>
                 <li class="nav-item mb-2">
-                    <a href="invoice.html">
+                    <a href="<?= base_url('pegawai/home'); ?>">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-home">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
@@ -83,8 +88,13 @@
                 </span>
 
                 <li class="nav-item">
-                    <a href="notification.html">
-                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-logout"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" /><path d="M9 12h12l-3 -3" /><path d="M18 15l3 -3" /></svg>
+                    <a href="<?= base_url('logout'); ?>">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-logout">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                            <path d="M9 12h12l-3 -3" />
+                            <path d="M18 15l3 -3" />
+                        </svg>
                         <span class="text">Logout</span>
                     </a>
                 </li>
@@ -176,7 +186,7 @@
                                     <div class="profile-info">
                                         <div class="info">
                                             <div class="image">
-                                                <img src="<?= base_url('assets/images/profile/profile-image.png') ?>" alt="" />
+                                                <img src="<?= base_url('profile/' . session()->get('foto_pegawai')); ?>" alt="" />
                                             </div>
                                             <div>
                                                 <h6 class="fw-500 text-uppercase"><?= session()->get('username') ?></h6>
@@ -260,7 +270,7 @@
                     <!-- end row -->
                 </div>
                 <!-- ========== title-wrapper end ========== -->
-                 <?= $this->renderSection('content') ?>
+                <?= $this->renderSection('content') ?>
             </div>
             <!-- end container -->
         </section>
@@ -273,6 +283,27 @@
     <script src="<?= base_url('assets/js/jvectormap.min.js') ?> "></script>
     <script src="<?= base_url('assets/js/polyfill.js') ?> "></script>
     <script src="<?= base_url('assets/js/main.js') ?> "></script>
+   
+    <!-- jquery cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    <script>
+        // gagal
+        $(function() {
+            <?php if (session()->has('gagal')) { ?>
+                Swal.fire({
+                    icon: "error",
+                    title: "Presensi Gagal",
+                    text: "<?= session()->get('gagal'); ?>"
+                });
+            <?php } ?>
+        });
+    </script>
+
 </body>
 
 </html>

@@ -240,7 +240,7 @@
                                     <div class="profile-info">
                                         <div class="info">
                                             <div class="image">
-                                                <img src="<?= base_url('assets/images/profile/profile-image.png') ?>" alt="" />
+                                                <img src="<?= base_url('profile/' . session()->get('foto_pegawai')); ?>" alt="" />
                                             </div>
                                             <div>
                                                 <h6 class="fw-500 text-uppercase"><?= session()->get('username') ?></h6>

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\LoginModel;
+use App\Models\PegawaiModel;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 
@@ -29,10 +30,12 @@ class Login extends BaseController
         } else {
             $session = session();
             $loginModel = new LoginModel;
+            $pegawaiModel = new PegawaiModel();
 
             $username = $this->request->getVar('username');
             $password = $this->request->getVar('password');
             $checkUsername = $loginModel->where('username', $username)->first();
+            $pegawai = $pegawaiModel->where('id', $checkUsername['id'])->first();
 
             if ($checkUsername) {
                 $passwordDb = $checkUsername['password'];
@@ -43,7 +46,8 @@ class Login extends BaseController
                         'logged_in' => TRUE,
                         'role_id' => $checkUsername['role'],
                         'username' => $checkUsername['username'],
-                        'id_pegawai' => $checkUsername['id']
+                        'id_pegawai' => $checkUsername['id'],
+                        'foto_pegawai' => $pegawai['foto_pegawai'] ?? 'farel.jpg'
                     ];
                     $session->set($session_data);
 
