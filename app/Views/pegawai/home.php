@@ -10,6 +10,18 @@
     font-weight: bold;
     justify-content: center;
   }
+
+  #map {
+    height: 400px;
+    width: 680px;
+    margin: auto;
+  }
+
+  .leaflet-marker-icon.circle-icon {
+    border-radius: 50%;
+    border: 2px solid white; 
+    object-fit: cover; /* agar gambar terpotong rapi */
+  }
 </style>
 
 <div class="row">
@@ -111,8 +123,12 @@
       <?php endif; ?>
     </div>
   </div>
-  <div class="col-md-2"></div>
+  <div class="col-md-2">
+
+  </div>
+
 </div>
+<div id="map" class="mt-3"></div>
 
 <script>
   window.setInterval("waktuMasuk()", 1000);
@@ -152,10 +168,47 @@
   }
 
   function showPosition(position) {
-    document.getElementById('latitude_pegawai').value = position.coords.latitude;
-    document.getElementById('longitude_pegawai').value = position.coords.longitude;
+    var latitude_pegawai = position.coords.latitude;
+    var longitude_pegawai = position.coords.longitude;
+
+    document.getElementById('latitude_pegawai').value = latitude_pegawai;
+    document.getElementById('longitude_pegawai').value = longitude_pegawai;
+
+    initMap(latitude_pegawai, longitude_pegawai);
+  }
+
+  function initMap(latitude_pegawai, longitude_pegawai) {
+    // leaflet js
+    var map = L.map('map').setView([<?= $lokasi_presensi['latitude']; ?>, <?= $lokasi_presensi['longitude']; ?>], 13);
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 20,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    // var marker = L.marker([latitude_pegawai, longitude_pegawai]).addTo(map);
+
+    var greenIcon = L.icon({
+      iconUrl: '<?= base_url('profile/' . session()->get('foto_pegawai')); ?>',
+      className: 'circle-icon',
+      iconSize: [50, 50], // size of the icon
+    });
+
+    L.marker([latitude_pegawai, longitude_pegawai], {
+      icon: greenIcon
+    }).addTo(map);
+
+    var circle = L.circle([<?= $lokasi_presensi['latitude']; ?>, <?= $lokasi_presensi['longitude']; ?>], {
+      color: 'red',
+      fillColor: '#f03',
+      fillOpacity: 0.5,
+      radius: <?= $lokasi_presensi['radius']; ?>
+    }).addTo(map);
+
+    // marker.bindPopup("lokasi anda saat ini").openPopup();
+    L.marker([latitude_pegawai, longitude_pegawai], {icon: greenIcon}).addTo(map).bindPopup("Lokasi Anda saat ini.").openPopup();
+    circle.bindPopup("Radius Kantor Berada");
   }
 </script>
-
 
 <?= $this->endSection() ?>

@@ -35,9 +35,9 @@ class Login extends BaseController
             $username = $this->request->getVar('username');
             $password = $this->request->getVar('password');
             $checkUsername = $loginModel->where('username', $username)->first();
-            $pegawai = $pegawaiModel->where('id', $checkUsername['id'])->first();
 
             if ($checkUsername) {
+                $pegawai = $pegawaiModel->where('id', $checkUsername['id'])->first();
                 $passwordDb = $checkUsername['password'];
                 $checkPassword = password_verify($password, $passwordDb);
                 if ($checkPassword) {
@@ -77,6 +77,4 @@ class Login extends BaseController
         $session->destroy();
         return redirect()->to('/');
     }
-
-
 }
