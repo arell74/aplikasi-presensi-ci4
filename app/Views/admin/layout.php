@@ -54,7 +54,7 @@
         <nav class="sidebar-nav">
             <ul>
                 <li class="nav-item mb-2">
-                    <a href="invoice.html">
+                    <a href="<?= base_url('admin/home'); ?>">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-home">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
@@ -151,14 +151,14 @@
                 </span>
 
                 <li class="nav-item">
-                    <a href="<?= base_url('logout'); ?>">
+                    <a href="<?= base_url('logout'); ?>" class="tombol-logout">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-logout">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
                             <path d="M9 12h12l-3 -3" />
                             <path d="M18 15l3 -3" />
                         </svg>
-                        <span class="text">Logout</span>
+                        <span class="text tombol-logout">Logout</span>
                     </a>
                 </li>
             </ul>
@@ -396,6 +396,25 @@
                 confirmButtonColor: "#3085d6",
                 cancelButtonColor: "#d33",
                 confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = getLink
+                }
+            });
+            return false;
+        });
+
+        // swal konfirmasi logout
+        $('.tombol-logout').on('click', function() {
+            var getLink = $(this).attr('href');
+            Swal.fire({
+                title: "Yakin Ingin Logout?",
+                text: "Setelah Melakukan Logout Anda Harus Login Kembali!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, Keluar"
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.href = getLink

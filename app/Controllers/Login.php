@@ -9,6 +9,11 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class Login extends BaseController
 {
+    function __construct()
+    {
+        helper(['url', 'form']);
+    }
+
     public function index()
     {
         $data = [
