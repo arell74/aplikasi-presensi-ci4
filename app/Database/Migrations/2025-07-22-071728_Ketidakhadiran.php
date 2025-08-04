@@ -42,7 +42,7 @@ class Ketidakhadiran extends Migration
         ]);
         $this->forge->addKey('id', true);
         $this->forge->addForeignKey('id_pegawai', 'pegawai', 'id');
-        $this->forge->createTable('ketidakhdiran');
+        $this->forge->createTable('ketidakhadiran');
     }
 
     public function down()

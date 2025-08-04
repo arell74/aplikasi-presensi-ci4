@@ -80,7 +80,7 @@
                 </li>
 
                 <li class="nav-item mb-2">
-                    <a href="invoice.html">
+                    <a href="<?= base_url('pegawai/ketidakhadiran'); ?>">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user-x">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
@@ -311,6 +311,46 @@
                 });
             <?php } ?>
         });
+
+        $(function() {
+            <?php if (session()->has('berhasil')) { ?>
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                });
+                Toast.fire({
+                    icon: "success",
+                    title: "<?= $_SESSION['berhasil']; ?>"
+                });
+            <?php } ?>
+        });
+
+        // swal konfirmasi hapus
+        $('.tombol-hapus').on('click', function() {
+            var getLink = $(this).attr('href');
+            Swal.fire({
+                title: "Yakin Hapus?",
+                text: "Data yang sudah dihapus tidak bisa dikembalikan!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = getLink
+                }
+            });
+            return false;
+        });
+
     </script>
 
 </body>
