@@ -19,6 +19,9 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.34.1/tabler-icons.min.css" integrity="sha512-s0zOeW/zxh8f817uykbgBqmx1dwmdvWwQYamh+lU9NzP8jeQ/ikNPE9dBK+C55A5WUtOetZAI09tLxKIj0r9WQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- dataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.2/css/dataTables.dataTables.css" />
+
     <!-- leaflet js -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
@@ -97,7 +100,7 @@
                 </span>
 
                 <li class="nav-item">
-                    <a href="<?= base_url('logout'); ?>">
+                    <a href="<?= base_url('logout'); ?>" class="tombol-logout">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-logout">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
@@ -299,8 +302,16 @@
     <!-- sweet Alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!-- dataTable -->
+    <script src="https://cdn.datatables.net/2.3.2/js/dataTables.js"></script>
+
 
     <script>
+        // dataTable
+        $(document).ready(function() {
+            $('#datatables').DataTable();
+        });
+
         // gagal
         $(function() {
             <?php if (session()->has('gagal')) { ?>
@@ -351,6 +362,24 @@
             return false;
         });
 
+        // swal konfirmasi logout
+        $('.tombol-logout').on('click', function() {
+            var getLink = $(this).attr('href');
+            Swal.fire({
+                title: "Yakin Ingin Logout?",
+                text: "Setelah Melakukan Logout Anda Harus Login Kembali!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya, Keluar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = getLink
+                }
+            });
+            return false;
+        });
     </script>
 
 </body>

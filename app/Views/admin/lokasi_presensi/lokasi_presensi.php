@@ -6,7 +6,7 @@
     <i class="lni lni-plus"></i> 
      Tambah Data</a>
 
-     <table class="table table-striped" id="datatables">
+     <table class="table table-striped display responsive nowrap" style="width:100%" id="datatables">
         <thead>
             <tr>
                 <th>No</th>
