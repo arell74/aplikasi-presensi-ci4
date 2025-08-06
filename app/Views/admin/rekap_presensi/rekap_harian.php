@@ -9,6 +9,9 @@
     <div class="col-auto">
         <button type="submit" class="btn btn-primary">Tampilkan</button>
     </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-success" name="excel">Ekspor Excel</button>
+    </div>
 </form>
 
 <div class="my-2">
