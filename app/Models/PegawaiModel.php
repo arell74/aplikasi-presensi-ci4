@@ -38,4 +38,14 @@ class PegawaiModel extends Model
         $builder->where('pegawai.id', $id);
         return $builder->get()->getRowArray();
     }
+
+    public function generateNIP()
+    {
+        $pegawai = new PegawaiModel();
+        $pegawaiTerakhir = $pegawai->select('nip')->orderBy('id', 'DESC')->first();
+        $nipTerakhir = $pegawaiTerakhir ? $pegawaiTerakhir['nip'] : 'PEG-0000';
+        $angkaNIP = (int) substr($nipTerakhir, 4);
+        $angkaNIP++;
+        return 'PEG-' . str_pad($angkaNIP, 4, '0', STR_PAD_LEFT);
+    }
 }
