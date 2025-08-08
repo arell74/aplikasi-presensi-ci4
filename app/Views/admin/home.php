@@ -7,7 +7,8 @@
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="icon-card mb-30">
                 <div class="icon purple">
-                  <i class="lni lni-user"></i>
+                  <a href="<?= base_url('admin/data_pegawai'); ?>" class="link-info">
+                  <i class="lni lni-user"></i></a>
                 </div>
                 <div class="content">
                   <h6 class="mb-10">Total Pegawai</h6>
@@ -20,7 +21,9 @@
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="icon-card mb-30">
                 <div class="icon success">
+                  <a href="<?= base_url('admin/rekap_harian'); ?>" class="link-success">
                   	<i class="lni lni-checkmark-circle"></i>
+                  </a>
                 </div>
                 <div class="content">
                   <h6 class="mb-10">Hadir</h6>
@@ -33,7 +36,9 @@
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="icon-card mb-30">
                 <div class="icon orange">
+                  <a href="<?= base_url('admin/ketidakhadiran'); ?>" class="link-danger">
                   	<i class="lni lni-cross-circle"></i>
+                  </a>
                 </div>
                 <div class="content">
                   <h6 class="mb-10">Alpa</h6>
@@ -46,7 +51,9 @@
             <div class="col-xl-3 col-lg-4 col-sm-6">
               <div class="icon-card mb-30">
                 <div class="icon primary">
-                  <i class="lni lni-clipboard"></i>
+                  <a href="<?= base_url('admin/ketidakhadiran'); ?>" class="link-primary">
+                    <i class="lni lni-clipboard"></i>
+                  </a>
                 </div>
                 <div class="content">
                   <h6 class="mb-10">Cuti/Izin/Sakit</h6>

@@ -309,7 +309,15 @@
     <script>
         // dataTable
         $(document).ready(function() {
-            $('#datatables').DataTable();
+            // Cek apakah tabel memiliki baris data <tbody>
+            // Kondisi ini akan memeriksa apakah ada <tr> di dalam <tbody>
+            if ($('#datatables tbody tr').length > 0) {
+                // Jika ada data, inisialisasi DataTables
+                $('#datatables').DataTable({
+                    responsive: true,
+                    scrollX: true
+                });
+            }
         });
 
         // gagal
