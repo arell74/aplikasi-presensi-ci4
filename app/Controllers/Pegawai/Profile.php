@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Controllers\Admin;
+namespace App\Controllers\Pegawai;
 
-use App\Models\JabatanModel;
-use App\Models\PegawaiModel;
 use App\Controllers\BaseController;
+use App\Models\JabatanModel;
 use App\Models\LokasiPresensiModel;
+use App\Models\PegawaiModel;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class Profile extends BaseController
@@ -14,16 +14,19 @@ class Profile extends BaseController
     {
         $pegawai_model = new PegawaiModel();
         $id_pegawai = session()->get('id_pegawai');
+        $jabatan_model = new JabatanModel();
         $lokasi_presensi_model = new LokasiPresensiModel();
 
         $data = [
             'title' => 'Profile',
             'pegawai' => $pegawai_model->where('id', $id_pegawai)->findAll(),
-            'id_pegawai' => $pegawai_model->where('id', $id_pegawai)->first(),
             'validation' => service('validation'),
-            'lokasi_presensi' => $lokasi_presensi_model->findAll()
+            'jabatan' => $jabatan_model->findAll(),
+            'id_pegawai' => $pegawai_model->where('id', $id_pegawai)->first(),
+            'lokasi_presensi' => $lokasi_presensi_model->findAll(),
         ];
-        return view('admin/profile/profile', $data);
+
+        return view('pegawai/profile/profile', $data);
     }
 
     public function update($id)
@@ -73,7 +76,7 @@ class Profile extends BaseController
                 'jabatan' => $jabatan->orderBy('jabatan', 'ASC')->findAll(),
             ];
 
-            return view('admin/profile', $data);
+            return view('pegawai/profile', $data);
         } else {
             $pegawaiModel = new PegawaiModel();
             $foto = $this->request->getFile('foto_pegawai');
@@ -103,7 +106,7 @@ class Profile extends BaseController
 
             session()->set('foto_pegawai', $nama_foto);
 
-            return redirect()->to(base_url('admin/profile'));
+            return redirect()->to(base_url('pegawai/profile'));
         }
     }
 }

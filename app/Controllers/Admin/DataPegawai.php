@@ -252,7 +252,24 @@ class DataPegawai extends BaseController
                     'required' => "Role Wajib Diisi!"
                 ],
             ],
+            
         ];
+
+        if (!empty($password)) {
+            $rules['password'] = [
+            'rules' => 'required|min_length[6]',
+            'errors' => [
+                'required' => 'Password wajib diisi!',
+                'min_length' => 'Password minimal 6 karakter!'
+            ]
+        ];
+        $rules['konfirmasi_password'] = [
+            'rules' => 'matches[password]',
+            'errors' => [
+                'matches' => "Konfirmasi Password tidak cocok!"
+            ],
+        ];
+        }
 
         if (!$this->validate($rules)) {
             $jabatan = new JabatanModel();
@@ -276,7 +293,13 @@ class DataPegawai extends BaseController
                 $nama_foto = $this->request->getPost('foto_lama');
             } else {
                 $nama_foto = $foto->getRandomName();
-                $foto->move('profile', $nama_foto);
+                $foto->move(FCPATH . 'profile', $nama_foto);
+
+                // Hapus foto lama kalau ada
+                $fotoLama = $this->request->getPost('foto_lama');
+                if ($fotoLama && file_exists(FCPATH . 'profile/' . $fotoLama)) {
+                    unlink(FCPATH . 'profile/' . $fotoLama);
+                }
             }
             $pegawaiModel->update($id, [
                 'nama' => $this->request->getPost('nama'),
@@ -302,6 +325,8 @@ class DataPegawai extends BaseController
                     'role' => $this->request->getPost('role')
                     ])
                 ->update();
+
+            session()->set('foto_pegawai', $nama_foto);
 
             session()->setFlashdata('berhasil', 'Data Pegawai Berhasil Diupdate!');
 

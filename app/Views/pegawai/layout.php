@@ -209,20 +209,7 @@
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profile">
                                     <li>
-                                        <div class="author-info flex items-center !p-1">
-                                            <div class="image">
-                                                <img src="<?= base_url('assets/images/profile/profile-image.png') ?>" alt="image">
-                                            </div>
-                                            <div class="content">
-                                                <h4 class="text-sm"><?= session()->get('username') ?></h4>
-                                                <a class="text-black/40 dark:text-white/40 hover:text-black dark:hover:text-white text-xs"
-                                                    href="#">Email@gmail.com</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="#0">
+                                        <a href="<?= base_url('pegawai/profile'); ?>">
                                             <i class="lni lni-user"></i> View Profile
                                         </a>
                                     </li>

@@ -40,6 +40,7 @@ $routes->get('admin/ketidakhadiran', 'Admin\Ketidakhadiran::index', ['filter' =>
 $routes->get('admin/ketidakhadiran/approved_ketidakhadiran/(:segment)', 'Admin\Ketidakhadiran::approved/$1', ['filter' => 'adminFilter']);
 
 $routes->get('admin/profile', 'Admin\Profile::index', ['filter' => 'adminFilter']);
+$routes->post('admin/profile_update/(:segment)', 'Admin\Profile::update/$1', ['filter' => 'adminFilter']);
 
 $routes->get('pegawai/home', 'Pegawai\Home::index', ['filter' => 'pegawaiFilter']);
 $routes->post('pegawai/presensi_masuk', 'Pegawai\Home::presensi_masuk', ['filter' => 'pegawaiFilter']);
@@ -57,3 +58,5 @@ $routes->post('pegawai/ketidakhadiran/update/(:segment)', 'Pegawai\Ketidakhadira
 $routes->get('pegawai/ketidakhadiran/delete/(:segment)', 'Pegawai\Ketidakhadiran::delete/$1', ['filter' => 'pegawaiFilter']);
 $routes->get('pegawai/ketidakhadiran/detail/(:segment)', 'Pegawai\Ketidakhadiran::detail/$1', ['filter' => 'pegawaiFilter']);
 
+$routes->get('pegawai/profile', 'Pegawai\Profile::index', ['filter' => 'pegawaiFilter']);
+$routes->post('pegawai/update/(:segment)', 'Pegawai\Profile::Update/$1', ['filter' => 'pegawaiFilter']);
