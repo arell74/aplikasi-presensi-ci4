@@ -32,9 +32,9 @@
                     <div class="auth-cover-wrapper bg-primary-100">
                         <div class="auth-cover">
                             <div class="title text-center">
-                                <h1 class="text-primary mb-10">Welcome Back</h1>
+                                <h1 class="text-primary mb-10">Selamat Datang!</h1>
                                 <p class="text-medium">
-                                    Sign in to your Existing account to continue
+                                    Silahkan Sign In sesuai Role anda
                                 </p>
                             </div>
                             <div class="cover-image">
@@ -52,8 +52,7 @@
                         <div class="form-wrapper">
                             <h6 class="mb-15">Sign In Form</h6>
                             <p class="text-sm mb-25">
-                                Start creating the best possible user experience for you
-                                customers.
+                                Presensi modern untuk hari yang produktif.
                             </p>
 
                             <?php if(!empty(session()->getFlashdata('pesan'))) : ?>
@@ -134,31 +133,6 @@
     <!-- ========== signin-section end ========== -->
 
     <!-- ========== footer start =========== -->
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6 order-last order-md-first">
-                    <div class="copyright text-center text-md-start">
-                        <p class="text-sm">
-                            Designed and Developed by
-                            <a href="https://plainadmin.com" rel="nofollow" target="_blank">
-                                PlainAdmin
-                            </a>
-                        </p>
-                    </div>
-                </div>
-                <!-- end col-->
-                <div class="col-md-6">
-                    <div class="terms d-flex justify-content-center justify-content-md-end">
-                        <a href="#0" class="text-sm">Term & Conditions</a>
-                        <a href="#0" class="text-sm ml-15">Privacy & Policy</a>
-                    </div>
-                </div>
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- end container -->
-    </footer>
     <!-- ========== footer end =========== -->
 
     <!-- ========= All Javascript files linkup ======== -->

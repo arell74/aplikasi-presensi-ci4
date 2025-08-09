@@ -10,6 +10,7 @@ $routes->post('login', 'Login::login_action');
 $routes->get('logout', 'Login::logout');
 
 $routes->get('admin/home', 'Admin\Home::index', ['filter' => 'adminFilter']);
+$routes->get('admin/undefined', 'Login::logout');
 $routes->get('admin/jabatan', 'Admin\Jabatan::index', ['filter' => 'adminFilter']);
 $routes->get('admin/jabatan/create', 'Admin\Jabatan::create', ['filter' => 'adminFilter']);
 $routes->post('admin/jabatan/store', 'Admin\Jabatan::store', ['filter' => 'adminFilter']);

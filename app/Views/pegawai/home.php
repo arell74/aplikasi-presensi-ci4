@@ -3,43 +3,66 @@
 <?= $this->section('content') ?>
 
 <style>
-  .parent-clock {
-    display: grid;
-    grid-template-columns: auto auto auto auto auto;
-    font-size: 30px;
-    font-weight: bold;
-    justify-content: center;
-  }
-
-  #map {
-    height: 400px;
-    width: 680px;
-    margin: auto;
-  }
-
-  .leaflet-marker-icon.circle-icon {
-    border-radius: 50%;
-    border: 2px solid white; 
-    object-fit: cover; /* agar gambar terpotong rapi */
-  }
+  .presensi-card {
+        border-radius: 1rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out;
+    }
+    .presensi-card:hover {
+        transform: translateY(-5px);
+    }
+    .card-header {
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #e9ecef;
+        font-weight: bold;
+    }
+    .clock-display {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #007bff;
+        gap: 0.5rem;
+    }
+    .tanggal {
+        font-size: 1.2rem;
+        color: #6c757d;
+        margin-bottom: 1rem;
+    }
+    #map {
+        height: 500px;
+        width: 830px;
+        margin: auto;
+        border-radius: 1rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+    .leaflet-marker-icon.circle-icon {
+        border-radius: 50%;
+        border: 2px solid white;
+        object-fit: cover;
+    }
 </style>
 
-<div class="row">
-  <div class="col-md-2"></div>
-  <div class="col-md-4">
-    <div class="card h-100">
-      <div class="card-header">Presensi Masuk</div>
+<div class="row justify-content-center g-4">
+  <div class="col-md-5">
+    <div class="card h-100 presensi-card">
+      <div class="card-header text-center">Presensi Masuk</div>
       <?php if ($cek_presensi < 1) : ?>
-        <div class="card-body text-center">
-          <div class="tanggal"><?= date('d F Y') ?></div>
-          <div class="parent-clock">
-            <div id="jam-masuk"></div>
-            <div>:</div>
-            <div id="menit-masuk"></div>
-            <div>:</div>
-            <div id="detik-masuk"></div>
+        <div class="card-body text-center d-flex flex-column justify-content-between">
+          <div>
+            <div class="tanggal"><?= date('d F Y') ?></div>
+            <div class="clock-display">
+              <div id="jam-masuk"></div>
+              <div>:</div>
+              <div id="menit-masuk"></div>
+              <div>:</div>
+              <div id="detik-masuk"></div>
+            </div>
           </div>
-          <form method="POST" action="<?= base_url('pegawai/presensi_masuk'); ?>">
+          <form method="POST" action="<?= base_url('pegawai/presensi_masuk'); ?>" class="mt-4">
             <?php
             if ($lokasi_presensi['zona_waktu'] == 'WIB') {
               date_default_timezone_set('Asia/Jakarta');
@@ -60,43 +83,44 @@
             <input type="hidden" name="tanggal_masuk" value="<?= date('Y-m-d'); ?>">
             <input type="hidden" name="jam_masuk" value="<?= date('H:i:s'); ?>">
             <input type="hidden" name="id_pegawai" value="<?= session()->get('id_pegawai'); ?>">
-            <button class="btn btn-primary mt-3">Masuk</button>
+            <button class="btn btn-primary btn-block">Presensi Masuk</button>
           </form>
         </div>
       <?php else : ?>
-        <div class="card-body text-center">
-          <i class="lni lni-checkmark-circle" style="font-size: 32px;"></i>
-          <h5 class="text-center mt-2">Anda Telah Melakukan Presensi Masuk</h5>
+        <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
+          <i class="lni lni-checkmark-circle" style="font-size: 3rem;"></i>
+          <h5 class="mt-3">Anda Telah Melakukan Presensi Masuk</h5>
         </div>
       <?php endif; ?>
     </div>
   </div>
 
-  <div class="col-md-4">
-    <div class="card h-100">
-      <div class="card-header">Presensi Keluar</div>
-
+  <div class="col-md-5">
+    <div class="card h-100 presensi-card">
+      <div class="card-header text-center">Presensi Keluar</div>
       <?php if ($cek_presensi < 1) : ?>
-        <div class="card-body text-center">
-          <i class="lni lni-alarm-clock" style="font-size: 32px;"></i>
-          <h5 class="text-center mt-2">Anda Belum Melakukan Presensi Masuk</h5>
+        <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
+          <i class="lni lni-warning" style="font-size: 3rem;"></i>
+          <h5 class="mt-3">Anda Belum Melakukan Presensi Masuk</h5>
         </div>
       <?php elseif ($cek_presensi_keluar > 0) : ?>
-        <div class="card-body text-center">
-          <i class="lni lni-alarm-clock" style="font-size: 32px;"></i>
-          <h5 class="text-center mt-2">Anda Telah Melakukan Presensi Keluar</h5>
+        <div class="card-body text-center d-flex flex-column justify-content-center align-items-center">
+          <i class="lni lni-checkmark-circle" style="font-size: 3rem;"></i>
+          <h5 class="mt-3">Anda Telah Melakukan Presensi Keluar</h5>
         </div>
       <?php else : ?>
-        <div class="card-body text-center">
-          <div class="tanggal"><?= date('d F Y') ?></div>
-          <div class="parent-clock">
-            <div id="jam-keluar"></div>
-            <div>:</div>
-            <div id="menit-keluar"></div>
-            <div>:</div>
-            <div id="detik-keluar"></div>
+        <div class="card-body text-center d-flex flex-column justify-content-between">
+          <div>
+            <div class="tanggal"><?= date('d F Y') ?></div>
+            <div class="clock-display">
+              <div id="jam-keluar"></div>
+              <div>:</div>
+              <div id="menit-keluar"></div>
+              <div>:</div>
+              <div id="detik-keluar"></div>
+            </div>
           </div>
-          <form method="POST" action="<?= base_url('pegawai/presensi_keluar/' . $ambil_presensi_masuk['id']) ?>">
+          <form method="POST" action="<?= base_url('pegawai/presensi_keluar/' . ($ambil_presensi_masuk['id'] ?? '')) ?>" class="mt-4">
             <!-- <form method="POST" action="<?= base_url('pegawai/presensi_keluar/' . ($ambil_presensi_masuk['id'] ?? '')) ?>"> -->
             <?php
             if ($lokasi_presensi['zona_waktu'] == 'WIB') {
@@ -117,16 +141,12 @@
 
             <input type="hidden" name="tanggal_keluar" value="<?= date('Y-m-d'); ?>">
             <input type="hidden" name="jam_keluar" value="<?= date('H:i:s'); ?>">
-            <button class="btn btn-danger mt-3">Keluar</button>
+            <button class="btn btn-danger btn-block">Presensi Keluar</button>
           </form>
         </div>
       <?php endif; ?>
     </div>
   </div>
-  <div class="col-md-2">
-
-  </div>
-
 </div>
 <div id="map" class="mt-3"></div>
 
@@ -206,7 +226,9 @@
     }).addTo(map);
 
     // marker.bindPopup("lokasi anda saat ini").openPopup();
-    L.marker([latitude_pegawai, longitude_pegawai], {icon: greenIcon}).addTo(map).bindPopup("Lokasi Anda saat ini.").openPopup();
+    L.marker([latitude_pegawai, longitude_pegawai], {
+      icon: greenIcon
+    }).addTo(map).bindPopup("Lokasi Anda saat ini.").openPopup();
     circle.bindPopup("Radius Kantor Berada");
   }
 </script>
