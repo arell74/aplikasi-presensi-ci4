@@ -43,6 +43,8 @@ $routes->get('admin/ketidakhadiran/approved_ketidakhadiran/(:segment)', 'Admin\K
 $routes->get('admin/profile', 'Admin\Profile::index', ['filter' => 'adminFilter']);
 $routes->post('admin/profile_update/(:segment)', 'Admin\Profile::update/$1', ['filter' => 'adminFilter']);
 
+$routes->get('admin/home/getPresensi', 'Admin\Home::getPresensi', ['filter' => 'adminFilter']);
+
 $routes->get('pegawai/home', 'Pegawai\Home::index', ['filter' => 'pegawaiFilter']);
 $routes->post('pegawai/presensi_masuk', 'Pegawai\Home::presensi_masuk', ['filter' => 'pegawaiFilter']);
 $routes->post('pegawai/presensi_masuk_aksi', 'Pegawai\Home::presensi_masuk_aksi', ['filter' => 'pegawaiFilter']);

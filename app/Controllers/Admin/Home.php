@@ -24,4 +24,20 @@ class Home extends BaseController
         ];
         return view('admin/home', $data);
     }
+
+    public function getPresensi()
+    {
+        $presensi_model = new PresensiModel();
+        $presensi = $presensi_model->get_all_presensi();
+
+        $events = [];
+        foreach ($presensi as $row) {
+            $events[] = [
+                'title' => 'Presensi: ' . $row['nama'],
+                'start' => date('Y-m-d', strtotime($row['tanggal_masuk']))
+            ];
+        }
+
+        return $this->response->setJSON($events);
+    }
 }

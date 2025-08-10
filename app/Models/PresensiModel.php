@@ -94,4 +94,15 @@ class PresensiModel extends Model
         $builder->where('tanggal_masuk', $filter_tanggal);
         return $builder->get()->getResultArray();
     }
+
+    public function get_all_presensi()
+    {
+        $db      = \Config\Database::connect();
+        $builder = $db->table('presensi');
+
+        $builder->select('presensi.tanggal_masuk, pegawai.nama');
+        $builder->join('pegawai', 'pegawai.id = presensi.id_pegawai');
+        // tidak perlu filter tanggal supaya semua muncul di kalender
+        return $builder->get()->getResultArray();
+    }
 }
