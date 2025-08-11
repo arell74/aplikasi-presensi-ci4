@@ -12,16 +12,28 @@ class PegawaiSeeder extends Seeder
         $pegawaiModel = new PegawaiModel();
 
         $data = [
-            'nip'            => $pegawaiModel->generateNIP(),
-            'nama'           => 'Admin Utama',
-            'jenis_kelamin'  => 'Laki-laki',
+            [
+                'nip'            => 'PEG-0001',
+                'nama'           => 'Admin Utama',
+                'jenis_kelamin'  => 'Laki-laki',
+                'alamat'         => 'Jl. Merdeka No.1',
+                'no_hp'          => '081234567890',
+                'jabatan'        => 'Administrator',
+                'lokasi_presensi' => 'Kantor Pusat',
+                'foto_pegawai'   => 'zani.jpg',
+            ],
+            [
+            'nip'            => 'PEG-0002',
+            'nama'           => 'Pegawai',
+            'jenis_kelamin'  => 'Perempuan',
             'alamat'         => 'Jl. Merdeka No.1',
             'no_hp'          => '081234567890',
-            'jabatan'        => 'Administrator',
-            'lokasi_presensi'=> 'Kantor Pusat',
+            'jabatan'        => 'IT Support',
+            'lokasi_presensi' => 'Kantor Pusat',
             'foto_pegawai'   => 'zani.jpg',
+            ]
         ];
 
-        $pegawaiModel->insert($data);
+        $this->db->table('pegawai')->insertBatch($data);
     }
 }

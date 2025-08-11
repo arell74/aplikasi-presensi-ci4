@@ -1,68 +1,96 @@
-# CodeIgniter 4 Application Starter
+# 🗓️ Aplikasi Presensi CI4
 
-## What is CodeIgniter?
+[![PHP Version](https://img.shields.io/badge/PHP-%5E8.1-blue?logo=php)](https://www.php.net/) [![CodeIgniter 4](https://img.shields.io/badge/CodeIgniter-4-red?logo=codeigniter)](https://codeigniter.com/) [![License](https://img.shields.io/github/license/arell74/aplikasi-presensi-ci4)](LICENSE) [![Last Commit](https://img.shields.io/github/last-commit/arell74/aplikasi-presensi-ci4)](https://github.com/arell74/aplikasi-presensi-ci4/commits/master)
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+**Aplikasi Presensi CI4 / Presen-ssi** adalah sistem informasi presensi pegawai berbasis **CodeIgniter 4** untuk mengelola data kehadiran, ketidakhadiran, dan profil pegawai secara digital.  
+Aplikasi ini mendukung fitur presensi harian, rekapitulasi, dan pengelolaan data pegawai dengan antarmuka yang mudah digunakan.
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+---
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+## 🚀 Fitur Utama
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+- **🔑 Login Multi-Role**  
+  Sistem otentikasi dengan dua peran pengguna: **Admin** dan **Pegawai**.
 
-## Installation & updates
+- **📍 Presensi GPS**  
+  Pegawai dapat melakukan presensi masuk dan pulang dengan validasi lokasi menggunakan GPS.
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+- **👤 Manajemen Pegawai**  
+  Admin dapat menambah, mengedit, dan menghapus data pegawai (termasuk profil & jabatan).
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+- **📝 Manajemen Ketidakhadiran**  
+  Pegawai dapat mengajukan izin atau cuti, sementara admin dapat mengelola & menyetujui pengajuan tersebut.
 
-## Setup
+- **📊 Rekapitulasi Presensi**  
+  - Tampilan rekap harian dan bulanan.  
+  - Ekspor data rekap ke **Excel (.xlsx)**.
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+- **📅 Kalender Interaktif**  
+  Kalender di dashboard admin menampilkan acara penting, rekap presensi, dan ketidakhadiran yang disetujui.
 
-## Important Change with index.php
+- **📂 Tampilan Profil**  
+  Setiap pegawai memiliki halaman profil pribadi untuk melihat detail informasi diri.
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+---
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+## 🖥 Persyaratan Sistem
 
-**Please** read the user guide for a better explanation of how CI4 works!
+- **PHP** versi `8.1` atau lebih tinggi.
+- **Composer** untuk manajemen dependensi PHP.
+- **Web Server** (Apache, Nginx, dll).
+- **Database** (MySQL, PostgreSQL, dll).
 
-## Repository Management
+> Pastikan ekstensi PHP berikut aktif:
+> - `intl`
+> - `mbstring`
+> - `json`
+> - `mysqlnd` *(jika menggunakan MySQL)*
+> - `libcurl`
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+---
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+## 📦 Panduan Instalasi
 
-## Server Requirements
+Ikuti langkah-langkah berikut untuk menjalankan aplikasi di lokal:
 
-PHP version 8.1 or higher is required, with the following extensions installed:
+### 1️⃣ Mengkloning Repositori
+```bash
+git clone https://github.com/USERNAME/aplikasi-presensi-ci4.git
+cd aplikasi-presensi-ci4
+```
+### 2️⃣ Instalasi Dependensi
+```bash
+- composer install
+```
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+### 3️⃣ Konfigurasi Lingkungan
+```bash
+buka file .env dan atur konfigurasi:
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - If you are still using PHP 7.4 or 8.0, you should upgrade immediately.
-> - The end of life date for PHP 8.1 will be December 31, 2025.
+# APP
+app.baseURL = 'http://localhost:8080'
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+# DATABASE
+database.default.hostname = localhost
+database.default.database = presensi_db
+database.default.username = root
+database.default.password =
+database.default.DBDriver = MySQLi
+```
+### 4️⃣ Migrasi & Seeder Database
+```bash
+php spark migrate
+php spark db:seed DatabaseSeeder
+```
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+### 5️⃣ Menjalankan Server
+```bash
+php spark serve
+```
+
+## 👤 Akun Pengguna Default
+| Peran   | Username | Password |
+| ------- | -------- | -------- |
+| Admin   | admin    | admin123 |
+| Pegawai | raiden     | pegawai321 |
+
