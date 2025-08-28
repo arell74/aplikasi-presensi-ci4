@@ -1,35 +1,31 @@
-# 🗓️ Aplikasi Presensi CI4
+# 🗓️ Aplikasi Todolist
 
-[![PHP Version](https://img.shields.io/badge/PHP-%5E8.1-blue?logo=php)](https://www.php.net/) [![CodeIgniter 4](https://img.shields.io/badge/CodeIgniter-4-red?logo=codeigniter)](https://codeigniter.com/) [![License](https://img.shields.io/github/license/arell74/aplikasi-presensi-ci4)](LICENSE) [![Last Commit](https://img.shields.io/github/last-commit/arell74/aplikasi-presensi-ci4)](https://github.com/arell74/aplikasi-presensi-ci4/commits/master)
+[![PHP Version](https://img.shields.io/badge/PHP-%5E8.1-blue?logo=php)](https://www.php.net/) [![CodeIgniter 4](https://img.shields.io/badge/CodeIgniter-4-red?logo=codeigniter)](https://codeigniter.com/) [![License](https://img.shields.io/github/license/arell74/ukk-2025-todolist-app)](LICENSE) [![Last Commit](https://img.shields.io/github/last-commit/arell74/ukk-2025-todolist-app)](https://github.com/arell74/ukk-2025-todolist-app/commits/main)
 
-**Aplikasi Presensi CI4 / Presen-ssi** adalah sistem informasi presensi pegawai berbasis **CodeIgniter 4** untuk mengelola data kehadiran, ketidakhadiran, dan profil pegawai secara digital.  
-Aplikasi ini mendukung fitur presensi harian, rekapitulasi, dan pengelolaan data pegawai dengan antarmuka yang mudah digunakan.
+Proyek ini merupakan salah satu proyek **UKK** jurusan Pengembangan Perangkat Lunak dan Gim. **Aplikasi To-Do List** berbasis web yang dibangun menggunakan Framework CodeIgniter 4.
+Aplikasi ini dirancang untuk *membantu pengguna dalam mengelola, mencatat, dan memantau aktivitas atau tugas harian secara lebih teratur dan efisien.*
 
 ---
 
 ## 🚀 Fitur Utama
 
-- **🔑 Login Multi-Role**  
-  Sistem otentikasi dengan dua peran pengguna: **Admin** dan **Pegawai**.
+- **🔑 Login Auth**  
+  Sistem login dan registrasi yang aman dengan pengelolaan peran pengguna.
 
-- **📍 Presensi GPS**  
-  Pegawai dapat melakukan presensi masuk dan pulang dengan validasi lokasi menggunakan GPS.
+- **📊 Manajemen Tugas**  
+   Menambah, mengubah, menghapus, serta menandai tugas yang sudah selesai.
 
-- **👤 Manajemen Pegawai**  
-  Admin dapat menambah, mengedit, dan menghapus data pegawai (termasuk profil & jabatan).
+- **📍 Kategori & Prioritas**  
+  Mengelompokkan tugas berdasarkan kategori (pekerjaan, belajar, pribadi, dll) dan tingkat prioritas (rendah, sedang, tinggi).
 
-- **📝 Manajemen Ketidakhadiran**  
-  Pegawai dapat mengajukan izin atau cuti, sementara admin dapat mengelola & menyetujui pengajuan tersebut.
-
-- **📊 Rekapitulasi Presensi**  
-  - Tampilan rekap harian dan bulanan.  
-  - Ekspor data rekap ke **Excel (.xlsx)**.
+- **📝 Pengingat Deadline**  
+  Menetapkan batas waktu (deadline) untuk setiap tugas agar tidak terlewat.
 
 - **📅 Kalender Interaktif**  
-  Kalender di dashboard admin menampilkan acara penting, rekap presensi, dan ketidakhadiran yang disetujui.
+  Menampilkan jadwal sesuai ketentuan hari.
 
-- **📂 Tampilan Profil**  
-  Setiap pegawai memiliki halaman profil pribadi untuk melihat detail informasi diri.
+- **📂 Tampilan Responsif**  
+  Antarmuka sederhana dan rapi yang dapat diakses baik di desktop maupun perangkat mobile.
 
 ---
 
@@ -55,8 +51,8 @@ Ikuti langkah-langkah berikut untuk menjalankan aplikasi di lokal:
 
 ### 1️⃣ Mengkloning Repositori
 ```bash
-git clone https://github.com/USERNAME/aplikasi-presensi-ci4.git
-cd aplikasi-presensi-ci4
+git clone https://github.com/arell74/ukk-2025-todolist-app.git
+cd ukk-2025-todolist-app
 ```
 ### 2️⃣ Instalasi Dependensi
 ```bash
@@ -72,7 +68,7 @@ app.baseURL = 'http://localhost:8080'
 
 # DATABASE
 database.default.hostname = localhost
-database.default.database = presensi_db
+database.default.database = todolist
 database.default.username = root
 database.default.password =
 database.default.DBDriver = MySQLi
@@ -80,7 +76,7 @@ database.default.DBDriver = MySQLi
 ### 4️⃣ Migrasi & Seeder Database
 ```bash
 php spark migrate
-php spark db:seed DatabaseSeeder
+php spark db:seed AllSeeder
 ```
 
 ### 5️⃣ Menjalankan Server
@@ -89,8 +85,7 @@ php spark serve
 ```
 
 ## 👤 Akun Pengguna Default
-| Peran   | Username | Password |
+| Email   | Username | Password |
 | ------- | -------- | -------- |
-| Admin   | admin    | admin123 |
-| Pegawai | raiden     | pegawai321 |
+| admin@gmail.com   | admin    | admin123 |
 
